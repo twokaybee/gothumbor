@@ -51,6 +51,11 @@ func getURLParts(imageURL string, options ThumborOptions) (urlPartial string, er
 		return "", err
 	}
 	newImageURL := partialObject.String()
+
+	if options.FitIn {
+		parts = append(parts, "fit-in")
+	}
+
 	if options.Meta {
 		parts = append(parts, "meta")
 	}
@@ -82,10 +87,6 @@ func getURLParts(imageURL string, options ThumborOptions) (urlPartial string, er
 	filters := []string{}
 	for _, value := range options.Filters {
 		filters = append(filters, value)
-	}
-
-	if options.FitIn {
-		parts = append(parts, "fit-in")
 	}
 
 	if len(options.Filters) > 0 {
